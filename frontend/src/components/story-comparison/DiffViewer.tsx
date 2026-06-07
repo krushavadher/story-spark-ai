@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { diffChars, Change } from "jsdiff";
+import { diffWords, Change } from "jsdiff";
 import DiffHighlight from "./DiffHighlight";
 
 interface IStoryVersion {
@@ -23,8 +23,8 @@ interface DiffViewerProps {
 
 const DiffViewer: React.FC<DiffViewerProps> = ({ version1, version2, onBack }) => {
   const differences = useMemo(() => {
-    return diffChars(version1.content, version2.content);
-  }, [version1.content, version2.content]);
+  return diffWords(version1.content, version2.content);
+}, [version1.content, version2.content]);
 
   const stats = useMemo(() => {
     let added = 0;
@@ -41,8 +41,8 @@ const DiffViewer: React.FC<DiffViewerProps> = ({ version1, version2, onBack }) =
   }, [differences]);
 
   const titleDiff = useMemo(() => {
-    return diffChars(version1.title, version2.title);
-  }, [version1.title, version2.title]);
+  return diffWords(version1.title, version2.title);
+}, [version1.title, version2.title]);
 
   return (
     <div className="space-y-6">
